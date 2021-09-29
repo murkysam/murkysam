@@ -6,4 +6,9 @@ class CNews():
         self.m_Title = ""
         self.m_Text = ""
         
+    def OnNewsTrigger(self):
+        pass
+
+    def OnNewsEnd(self):
+        pass
     

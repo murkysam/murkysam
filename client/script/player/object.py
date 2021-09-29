@@ -1,7 +1,8 @@
 from . import container
-from common import Log, FireEvent
+from common import Log, FireEvent, singleton
 
 
+@singleton
 class CPlayer():
 	
 	def __init__(self):

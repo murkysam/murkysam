@@ -9,6 +9,7 @@ class CEvent():
 		self.m_Event = defaultdict()
 
 	def RegisterEvent(self, sEvent, funcCallback):
+		print(f"RegisterEvent -> {sEvent}")
 		self.m_Index +=1
 		if not self.m_Event[sEvent]:
 			self.m_Event[sEvent] = {}
@@ -21,6 +22,7 @@ class CEvent():
 				del v[iIndex]
 		
 	def FireEvent(self, sEvent, *args, **kwargs):
+		print(f"FireEvent ->{sEvent}")
 		if sEvent in self.m_Event:
 			self.m_Event[sEvent](args, kwargs)
 
@@ -42,11 +44,23 @@ class CResManager():
 	def __init__(self) -> None:
 		self.m_Res = {}
 
+	def Register(self, obj):
+		self.m_Res[obj.__name__] = obj
+
 	def CallFunc(self, sResName, sFunc, *args, **kwargs):
 		pass
 
+if "g_ResManager" not in globals():
+	g_ResManager = CResManager()
 
-
+def singleton(cls):
+	_instance = {}
+	def inner():
+		if cls not in _instance:
+			_instance[cls] = cls()
+			g_ResManager.Register(_instance[cls])
+		return _instance[cls]
+	return inner
 
 def Init():
 	global g_Seed	
