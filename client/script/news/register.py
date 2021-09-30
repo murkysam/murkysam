@@ -10,4 +10,4 @@ class CNewsManger():
         print(f"触发了事件 {self.m_Title}, {self.m_Text}")
 
     def RegisterNews(self):
-        pass
+        import 
