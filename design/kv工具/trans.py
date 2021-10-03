@@ -7,10 +7,10 @@ class CCSVParser():
             f = open(sCsv, 'r', encoding="GBK")
         except:
             f = open(sCsv, 'r', encoding="utf-8")
-        keys = f.readline().strip('\n').split(',')
+        key = f.readline().strip('\n').split(',')
         for line in f.readlines():
-            values = line.strip('\n').split(',')
-            lstJson.append(dict(zip(keys, values)))
+            value = line.strip('\n').split(',')
+            lstJson.append(dict(zip(key, value)))
         f.close()
         ret = json.dumps(lstJson, indent=1)
         return ret

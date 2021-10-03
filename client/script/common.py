@@ -11,20 +11,21 @@ class CEvent():
 	def RegisterEvent(self, sEvent, funcCallback):
 		print(f"RegisterEvent -> {sEvent}")
 		self.m_Index +=1
-		if not self.m_Event[sEvent]:
+		if sEvent not in self.m_Event:
 			self.m_Event[sEvent] = {}
 		self.m_Event[sEvent].update({self.m_Index:funcCallback})
 		return self.m_Index
 
 	def UnregisterEvent(self, iIndex):
-		for v in self.m_Event.values():
-			if iIndex in v:
-				del v[iIndex]
+		for dicEvent in self.m_Event.values():
+			if iIndex in dicEvent.keys():
+				del dicEvent[iIndex]
 		
 	def FireEvent(self, sEvent, *args, **kwargs):
 		print(f"FireEvent ->{sEvent}")
 		if sEvent in self.m_Event:
-			self.m_Event[sEvent](args, kwargs)
+			for objCb in self.m_Event[sEvent].values():
+				objCb(args, kwargs)
 
 if "g_Event" not in globals():
 	g_Event = CEvent()
